@@ -1,0 +1,77 @@
+//
+//  HomeAlunoView.swift
+//  Projeto
+//
+//  Created by Turma01-27 on 13/05/25.
+//
+
+import SwiftUI
+
+struct HomeAlunoView: View {
+    var presente = false
+    var body: some View {
+        VStack{
+            
+            ZStack{
+                Color.cinza
+                    .edgesIgnoringSafeArea(.bottom)
+                VStack{
+                    
+                    VStack{
+                        HStack{
+                            Text("HackaTruck(Disciplina)")
+                                .font(.title)
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        HStack{
+                            Text("Prof. Edilson")
+                                .font(.system(size: 25))
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        HStack{
+                            Text("Dia: XX/XX/XXXX")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        .padding(.leading)
+                    }
+                        .padding(.bottom, 35)
+                        
+                    
+                    ZStack{
+                        Circle()
+                            .frame(width:170)
+                            .foregroundColor(.green)
+                        if presente{
+                            Circle()
+                                .frame(width:170)
+                                .foregroundColor(.green)
+                        }else{
+                            Circle()
+                                .frame(width:170)
+                                .foregroundColor(.red)
+                        }
+                    }
+                    
+                    Rectangle()
+                        .frame(height: 1)
+                        .ignoresSafeArea()
+                        .padding(.vertical, 20)
+                    VStack{
+                        Text("Faltas: ...")
+                            .font(.system(size: 25))
+                    }
+                    Spacer()
+                }
+                
+            }
+        }
+    }
+}
+
+#Preview {
+    HomeAlunoView()
+}
