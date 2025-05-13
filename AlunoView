@@ -1,0 +1,39 @@
+//
+//  FaltasView.swift
+//  Projetohacka
+//
+//  Created by Turma01-11 on 13/05/25.
+//
+
+import SwiftUI
+
+struct FaltasView: View {
+    var body: some View {
+        VStack {
+            Text("Disciplina: nome da disciplina")
+                .font(.title2)
+            Text("Professor: nome do professor")
+                .font(.title3)
+            VStack(spacing:40){
+                Text("Dia:13/05")
+                    .font(.subheadline)
+                Circle()
+                    .frame(width:150)
+            }
+            Rectangle()
+                .frame(height: 1)
+                .ignoresSafeArea()
+            VStack{
+                Text("Faltas: 0")
+                Text("Risco de reprovacao: X%")
+            }
+            
+            Spacer()
+
+        }
+    }
+}
+
+#Preview {
+    FaltasView()
+}
