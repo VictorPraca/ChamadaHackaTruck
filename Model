@@ -1,0 +1,32 @@
+//
+//  Model.swift
+//  Projetohacka
+//
+//  Created by Turma01-11 on 13/05/25.
+//
+
+import Foundation
+
+
+struct Aluno:Decodable,Hashable{
+   let nome:String?
+   let matricula:String?
+   let faltas:Int?
+    let disci:[Disciplina]?
+
+}
+
+struct Disciplina:Decodable,Hashable{
+    let professor:String?
+    let nome:String?
+    let data: [String?]
+    let id:Int?
+}
+
+struct Presenca:Decodable,Hashable{
+    let idAluno: String?
+    let idDisc:Int?
+    let datap:String?
+}
+
+
