@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ModelView: ObservableObject{
+class ViewModel: ObservableObject{
     
     @Published var aluno:[Aluno] = []
     @Published var disc:[Disciplina] = []
