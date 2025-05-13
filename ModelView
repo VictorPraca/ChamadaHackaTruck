@@ -1,0 +1,76 @@
+//
+//  ModelView.swift
+//  Projetohacka
+//
+//  Created by Turma01-11 on 13/05/25.
+//
+
+import Foundation
+
+class ModelView: ObservableObject{
+    
+    @Published var aluno:[Aluno] = []
+    @Published var disc:[Disciplina] = []
+    @Published var presen:[Presenca] = []
+    
+    //funcao alunos
+    func fetchAluno(){
+        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
+            guard let data = data, error == nil else{
+                return
+            }
+            do{
+                let parsed = try JSONDecoder().decode([Aluno].self,from:data)
+                DispatchQueue.main.sync{
+                    self?.aluno = parsed
+                }
+            }catch{
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    //funcao disciplinas
+    func fetchDisc(){
+        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
+            guard let data = data, error == nil else{
+                return
+            }
+            do{
+                let parsed = try JSONDecoder().decode([Disciplina].self,from:data)
+                DispatchQueue.main.sync{
+                    self?.disc = parsed
+                }
+            }catch{
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    //funcao presenca 
+    func fetchpresenca(){
+        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
+            guard let data = data, error == nil else{
+                return
+            }
+            do{
+                let parsed = try JSONDecoder().decode([Presenca].self,from:data)
+                DispatchQueue.main.sync{
+                    self?.presen = parsed
+                }
+            }catch{
+                print(error)
+            }
+        }
+        task.resume()
+    }
+}
