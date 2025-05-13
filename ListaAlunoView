@@ -1,0 +1,24 @@
+//
+//  ListaAlunoView.swift
+//  Projeto
+//
+//  Created by Turma01-27 on 13/05/25.
+//
+
+import SwiftUI
+
+struct ListaAlunoView: View {
+    var body: some View {
+        VStack{
+            ZStack{
+                Color.cinza
+                    .edgesIgnoringSafeArea(.top)
+                
+            }
+        }
+    }
+}
+
+#Preview {
+    ListaAlunoView()
+}
