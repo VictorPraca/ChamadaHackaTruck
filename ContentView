@@ -1,1 +1,54 @@
+//
+//  ContentView.swift
+//  Projeto
+//
+//  Created by Turma01-27 on 13/05/25.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        VStack {
+            NavigationStack{
+                ZStack{
+                    Color.cinza
+                        .ignoresSafeArea()
+                    VStack{
+//                    ALUNO
+                        NavigationLink(destination: AlunoView()){
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 175, height: 55)
+                                    .cornerRadius(7)
+                                    .foregroundColor(.black)
+                                Text("Aluno")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 25))
+                            }
+                        }
+                        .padding()
+//                    PROFESSOR
+                        NavigationLink(destination: ProfessorView()){
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 175, height: 55)
+                                    .cornerRadius(7)
+                                    .foregroundColor(.black)
+                                Text("Professor")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 25))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
 
