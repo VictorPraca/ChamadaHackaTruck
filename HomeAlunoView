@@ -18,32 +18,32 @@ struct HomeAlunoView: View {
                 VStack{
 //                  Disciplina
                     ForEach(viewModel.disc, id: \.self){ c in
-                        
-                    HStack{
-                        Text("\(c.nome!)")
-                            .font(.system(size: 30))
-                            .bold()
-                        Spacer()
-                    }
-                    .padding(.leading)
-//                  Professor
-                    HStack{
-                        Text("Prof. \(c.professor!)")
-                            .font(.system(size: 25))
-                        Spacer()
-                    }
-                    .padding(.leading)
-//                  Data
-                    HStack{
-                        if c.data.count > 0 {
-                            Text("\(c.data.first!)")
-                                .font(.system(size: 23))
+                        ForEach(c.data.filter({$0 == "14/05/2025"}), id: \.self){ d in
+                        HStack{
+                            Text("\(c.nome!)")
+                                .font(.system(size: 30))
+                                .bold()
+                            Spacer()
                         }
-                        Spacer()
+                        .padding(.leading)
+                        //                  Professor
+                        HStack{
+                            Text("Prof. \(c.professor!)")
+                                .font(.system(size: 25))
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        //                  Data
+                        HStack{
+                            if c.data.count > 0 {
+                                Text("\(c.data.first!)")
+                                    .font(.system(size: 23))
+                            }
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        .padding(.bottom, 35)
                     }
-                    .padding(.leading)
-                    .padding(.bottom, 35)
-                        
                 }
 //                    if(viewModel.pres()! == true){
 //                        Circle()
