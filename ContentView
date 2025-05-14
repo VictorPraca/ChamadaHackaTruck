@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @StateObject var viewModel = ViewModel()
     var body: some View {
         VStack {
             NavigationStack{
                 ZStack{
-                    Color.cinza
+                    Color.color
                         .ignoresSafeArea()
                     VStack{
 //                    ALUNO
@@ -22,9 +22,9 @@ struct ContentView: View {
                                 Rectangle()
                                     .frame(width: 175, height: 55)
                                     .cornerRadius(7)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.ciano)
                                 Text("Aluno")
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.black)
                                     .font(.system(size: 25))
                             }
                         }
@@ -35,15 +35,16 @@ struct ContentView: View {
                                 Rectangle()
                                     .frame(width: 175, height: 55)
                                     .cornerRadius(7)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.cinza)
                                 Text("Professor")
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.black)
                                     .font(.system(size: 25))
                             }
                         }
                     }
                 }
             }
+            .accentColor(.black)
         }
     }
 }
@@ -51,4 +52,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
