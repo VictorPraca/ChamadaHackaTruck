@@ -13,9 +13,9 @@ class ViewModel: ObservableObject{
     @Published var disc:[Disciplina] = []
     @Published var presen:[Presenca] = []
     
-    //funcao alunos
+    
     func fetchAluno(){
-        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+        guard let url = URL(string: "http://192.168.128.90:1880/LeituraA") else{
             return
         }
         let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
@@ -33,9 +33,12 @@ class ViewModel: ObservableObject{
         }
         task.resume()
     }
-    //funcao disciplinas
+    
+    
+    
+    
     func fetchDisc(){
-        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+        guard let url = URL(string: "http://192.168.128.90:1880/LeituraD") else{
             return
         }
         let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
@@ -53,9 +56,9 @@ class ViewModel: ObservableObject{
         }
         task.resume()
     }
-    //funcao presenca 
+    
     func fetchpresenca(){
-        guard let url = URL(string: "http://127.0.0.1:1880/reading") else{
+        guard let url = URL(string: "http://192.168.128.90:1880/LeituraP") else{
             return
         }
         let task = URLSession.shared.dataTask(with: url){[weak self] data, _,error in
@@ -72,5 +75,30 @@ class ViewModel: ObservableObject{
             }
         }
         task.resume()
+    }
+    
+    func pres() -> Bool?{
+        for dis in disc {
+            for data in dis.data{
+                for presenca in presen {
+                    if data == presenca.datap{
+                        for alun in aluno{
+                            for di in alun.idDisc{
+                                if di == dis.idDisc{
+                                    if alun.matricula == presenca.matricula{
+                                        return true
+                                    }else{
+                                        return false
+                                    }
+                                }else{return nil}
+                            }
+                        }
+                    }else{
+                        return nil
+                    }
+                }
+            }
+    }
+        return nil
     }
 }
