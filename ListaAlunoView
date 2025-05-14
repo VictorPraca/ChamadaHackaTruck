@@ -8,13 +8,40 @@
 import SwiftUI
 
 struct ListaAlunoView: View {
+    @StateObject var viewModel = ViewModel()
+    @State private var showingSheet = false
     var body: some View {
         VStack{
             ZStack{
-                Color.cinza
-                    .edgesIgnoringSafeArea(.top)
-                
+                Color.color
+                    .ignoresSafeArea()
+                VStack{
+                    HStack{
+                        Text("Matérias:")
+                            .padding()
+                            .bold()
+                            .font(.system(size: 25))
+                        Spacer()
+                    }
+                    ForEach(viewModel.disc, id: \.self){ c in
+                        ZStack{
+                            Rectangle()
+                                .frame(width: 335, height: 45)
+                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                            Button("\(c.nome!)") {
+                                
+                            }
+                            .accentColor(.black)
+                        }
+                    }
+                    Spacer()
+                }
             }
+        }.onAppear(){
+            viewModel.fetchAluno()
+            viewModel.fetchDisc()
+            viewModel.fetchpresenca()
         }
     }
 }
