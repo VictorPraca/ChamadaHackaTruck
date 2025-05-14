@@ -8,69 +8,66 @@
 import SwiftUI
 
 struct HomeAlunoView: View {
-    var presente = false
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
-        VStack{
+        ZStack{
+            Color.color
+                .ignoresSafeArea()
             
-            ZStack{
-                Color.cinza
-                    .edgesIgnoringSafeArea(.bottom)
                 VStack{
-                    
-                    VStack{
-                        HStack{
-                            Text("HackaTruck(Disciplina)")
-                                .font(.title)
-                                .bold()
-                            Spacer()
-                        }
-                        .padding(.leading)
-                        HStack{
-                            Text("Prof. Edilson")
-                                .font(.system(size: 25))
-                            Spacer()
-                        }
-                        .padding(.leading)
-                        HStack{
-                            Text("Dia: XX/XX/XXXX")
-                                .font(.system(size: 20))
-                            Spacer()
-                        }
-                        .padding(.leading)
-                    }
-                        .padding(.bottom, 35)
+//                  Disciplina
+                    ForEach(viewModel.disc, id: \.self){ c in
                         
-                    
-                    ZStack{
-                        Circle()
-                            .frame(width:170)
-                            .foregroundColor(.green)
-                        if presente{
-                            Circle()
-                                .frame(width:170)
-                                .foregroundColor(.green)
-                        }else{
-                            Circle()
-                                .frame(width:170)
-                                .foregroundColor(.red)
-                        }
+                    HStack{
+                        Text("\(c.nome!)")
+                            .font(.system(size: 30))
+                            .bold()
+                        Spacer()
                     }
+                    .padding(.leading)
+//                  Professor
+                    HStack{
+                        Text("Prof. \(c.professor!)")
+                            .font(.system(size: 25))
+                        Spacer()
+                    }
+                    .padding(.leading)
+//                  Data
+                    HStack{
+                        if c.data.count > 0 {
+                            Text("\(c.data.first!)")
+                                .font(.system(size: 23))
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading)
+                    .padding(.bottom, 35)
+                        
+                }
+//                    if(viewModel.pres()! == true){
+//                        Circle()
+//                            .fill(.green)
+//                    }
                     
                     Rectangle()
-                        .frame(height: 1)
+                        .frame(width: 320, height: 1)
                         .ignoresSafeArea()
+                        .cornerRadius(10)
                         .padding(.vertical, 20)
-                    VStack{
-                        Text("Faltas: ...")
+                    ForEach(viewModel.aluno, id: \.self){ a in
+                        Text("Faltas: \(a.faltas!)")
                             .font(.system(size: 25))
                     }
                     Spacer()
-                }
-                
-            }
+                    }
+        }.onAppear(){
+            viewModel.fetchDisc()
+            viewModel.fetchpresenca()
+            viewModel.fetchAluno()
+        }
         }
     }
-}
 
 #Preview {
     HomeAlunoView()
