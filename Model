@@ -9,24 +9,21 @@ import Foundation
 
 
 struct Aluno:Decodable,Hashable{
-   let nome:String?
-   let matricula:String?
-   let faltas:Int?
-    let disci:[Disciplina]?
-
+    let nome:String?
+    let matricula:Int? //id de cada aluno
+    let faltas:Int?
+    let idDisc:[Int]
 }
 
 struct Disciplina:Decodable,Hashable{
     let professor:String?
     let nome:String?
-    let data: [String?]
-    let id:Int?
+    let data: [String]
+    let idDisc:Int?
 }
 
 struct Presenca:Decodable,Hashable{
-    let idAluno: String?
+    let matricula: Int?
     let idDisc:Int?
     let datap:String?
 }
-
-
