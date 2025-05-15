@@ -10,7 +10,7 @@ import Foundation
 
 struct Aluno:Decodable,Hashable{
     let nome:String?
-    let matricula:Int? //id de cada aluno
+    let matricula:String? //id de cada aluno
     let faltas:Int?
     let idDisc:[Int]
 }
@@ -23,7 +23,7 @@ struct Disciplina:Decodable,Hashable{
 }
 
 struct Presenca:Decodable,Hashable{
-    let matricula: Int?
+    let matricula: String?
     let idDisc:Int?
     let datap:String?
 }
