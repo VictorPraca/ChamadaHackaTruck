@@ -8,29 +8,35 @@
 import SwiftUI
 
 struct SheetView: View {
-
+    @StateObject var viewModel = ViewModel()
+    var aluno: Aluno
     var body: some View {
         ZStack{
-            Color.color
+            Color.azulP
             VStack{
-                Image(systemName: "person.circle.fill")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 120))
-                Text("Nome do Aluno")
-                    .font(.system(size: 25))
-                    .bold()
-                HStack{
-                    Text("Matrícula: ...")
-                        .font(.system(size: 20))
-                }
-                HStack{
-                    Text("Faltas: ...")
-                        .font(.system(size: 20))
-                }
+                    Image(systemName: "person.circle.fill")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 120))
+                    Text("\(aluno.nome!)")
+                        .font(.system(size: 25))
+                        .bold()
+                    HStack{
+                        Text("Matrícula: \(aluno.matricula!)")
+                            .font(.system(size: 20))
+                    }
+                    HStack{
+                        Text("Faltas: \(aluno.faltas!)")
+                            .font(.system(size: 20))
+                    }
                 Spacer()
             }
             .presentationDetents([.height(550)])
             .padding(.top, 50)
+        }
+        .onAppear(){
+            viewModel.fetchDisc()
+            viewModel.fetchpresenca()
+            viewModel.fetchAluno()
         }
     }
 }
@@ -38,53 +44,69 @@ struct SheetView: View {
 
 struct HomeProfessorView: View {
     @State private var showingSheet = false
-    
+    @State private var selectedAluno: Aluno?
+    @StateObject var viewModel = ViewModel()
     var body: some View {
         ZStack{
-            Color.color
+            Color.azulP
                 .ignoresSafeArea()
+            ScrollView{
             VStack{
                 VStack{
-                    HStack{
-                        Text("HackaTruck(Disciplina)")
-                            .font(.title)
-                            .bold()
-                        Spacer()
-                    }
-                    .padding(.leading)
-                    HStack{
-                        Text("Dia: XX/XX/XXXX")
-                            .font(.system(size: 20))
-                        Spacer()
-                    }
-                    .padding(.leading)
-                }
-                .padding(.bottom, 35)
-
-//                    ForEach(){
-                ZStack{
-                    Rectangle()
-                        .frame(width: 335, height: 45)
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                    Button("Show Sheet") {
-                        showingSheet.toggle()
-                    }
-                    .accentColor(.black)
-                    .sheet(isPresented: $showingSheet ) {
-                        SheetView()
-                        
+                    ForEach(viewModel.disc, id: \.self){ c in
+                        ForEach(c.data.filter({$0 == "14/05/2025"}), id: \.self){ d in
+                            HStack{
+                                Text("\(c.nome!)")
+                                    .font(.system(size: 30))
+                                    .bold()
+                                Spacer()
+                            }
+                            .padding(.leading)
+                            //                  Data
+                            HStack{
+                                if c.data.count > 0 {
+                                    Text("\(c.data.first!)")
+                                        .font(.system(size: 23))
+                                }
+                                Spacer()
+                            }
+                            .padding(.leading)
+                            .padding(.bottom, 35)
+                        }
                     }
                 }
-//                    }
+                
+                ForEach(viewModel.aluno, id: \.self){ a in
+                    ZStack{
+                        Rectangle()
+                            .frame(width: 335, height: 45)
+                            .cornerRadius(10)
+                            .foregroundColor(.white)
+                        Button("\(a.nome!)") {
+                            selectedAluno = a
+                            showingSheet.toggle()
+                        }
+                        .accentColor(.black)
+                        .sheet(isPresented: $showingSheet ) {
+                            if let aluno = selectedAluno {
+                                SheetView(aluno: aluno)
+                            }
+                        }
+                    }
+                }
+            }
                 Spacer()
-                }
+            }
+            .onAppear(){
+                viewModel.fetchDisc()
+                viewModel.fetchpresenca()
+                viewModel.fetchAluno()
             }
         }
     }
+}
 
 
 #Preview {
     HomeProfessorView()
 }
-
