@@ -1,1 +1,45 @@
+//
+//  ListaProfessorView.swift
+//  Projeto
+//
+//  Created by Turma01-27 on 13/05/25.
+//
 
+import SwiftUI
+
+struct ListaProfessorView: View {
+    @StateObject var viewModel = ViewModel()
+    @State private var showingSheet = false
+    var body: some View {
+        ZStack{
+                Color.azulP
+                    .ignoresSafeArea()
+            VStack{
+                ScrollView{
+                    ForEach(viewModel.disc, id: \.self){ d in
+                        ZStack{
+                            Rectangle()
+                                .frame(width: 335, height: 45)
+                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                            Button("\(d.nome!)") {
+                                showingSheet.toggle()
+                            }
+                            .accentColor(.black)
+                            .sheet(isPresented: $showingSheet ) {
+                               
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }.onAppear(){
+            viewModel.fetchDisc()
+        }
+    }
+}
+
+#Preview {
+    ListaProfessorView()
+}
