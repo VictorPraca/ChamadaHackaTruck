@@ -1,39 +1,35 @@
 //
-//  FaltasView.swift
-//  Projetohacka
+//  AlunoView.swift
+//  Projeto
 //
-//  Created by Turma01-11 on 13/05/25.
+//  Created by Turma01-27 on 13/05/25.
 //
 
 import SwiftUI
 
 struct AlunoView: View {
-    var body: some View {
-        VStack {
-            Text("Disciplina: nome da disciplina")
-                .font(.title2)
-            Text("Professor: nome do professor")
-                .font(.title3)
-            VStack(spacing:40){
-                Text("Dia:13/05")
-                    .font(.subheadline)
-                Circle()
-                    .frame(width:150)
-            }
-            Rectangle()
-                .frame(height: 1)
-                .ignoresSafeArea()
-            VStack{
-                Text("Faltas: 0")
-                Text("Risco de reprovacao: X%")
-            }
-            
-            Spacer()
-
+    init() {
+            UITabBar.appearance().backgroundColor = UIColor.azulR
         }
+    var body: some View {
+        TabView{
+            HomeAlunoView(user: Aluno(nome: "", matricula: "", faltas: 1, idDisc: [1]))
+                .tabItem {
+                    Image(systemName: "house.fill")
+                }
+            ListaAlunoView()
+                .tabItem {
+                    Image(systemName: "line.3.horizontal")
+                }
+        }
+        .frame(maxHeight: .infinity)
+        .accentColor(.white)
     }
+    
+    
+    
 }
 
 #Preview {
-    FaltasView()
+    AlunoView()
 }
