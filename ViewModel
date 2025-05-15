@@ -93,8 +93,6 @@ class ViewModel: ObservableObject{
                                 }else{return nil}
                             }
                         }
-                    }else{
-                        return nil
                     }
                 }
             }
