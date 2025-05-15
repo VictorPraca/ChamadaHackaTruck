@@ -13,11 +13,12 @@ struct ListaAlunoView: View {
     var body: some View {
         VStack{
             ZStack{
-                Color.color
+                Color.azulP
                     .ignoresSafeArea()
+              ScrollView{
                 VStack{
                     HStack{
-                        Text("Matérias:")
+                        Text("Disciplinas:")
                             .padding()
                             .bold()
                             .font(.system(size: 25))
@@ -26,17 +27,34 @@ struct ListaAlunoView: View {
                     ForEach(viewModel.disc, id: \.self){ c in
                         ZStack{
                             Rectangle()
-                                .frame(width: 335, height: 45)
+                                .frame(width: 335, height: 90)
                                 .cornerRadius(10)
                                 .foregroundColor(.white)
-                            Button("\(c.nome!)") {
-                                
+                            VStack{
+                                HStack{
+                                    Text("\(c.nome!)")
+                                        .bold()
+                                    Spacer()
+                                    Text("Assunto: ....")
+                                }
+                                .padding(.horizontal, 40)
+                                HStack{
+                                    Text("\(c.professor!)")
+                                    Spacer()
+                                }
+                                .padding(.leading, 40)
+                                HStack{
+                                    Text("\(c.data.first!)")
+                                    Spacer()
+                                }
+                                .padding(.leading, 40)
                             }
                             .accentColor(.black)
                         }
                     }
                     Spacer()
                 }
+            }
             }
         }.onAppear(){
             viewModel.fetchAluno()
