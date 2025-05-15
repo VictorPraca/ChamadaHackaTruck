@@ -9,16 +9,25 @@ import SwiftUI
 
 struct HomeAlunoView: View {
     @StateObject var viewModel = ViewModel()
+    var currentDateString:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: Date())
+    }
+    var user : Aluno
     
     var body: some View {
         ZStack{
-            Color.color
+            Color.azulP
                 .ignoresSafeArea()
             
                 VStack{
+                    
+                    Text("\(user.nome!)")
+                    
 //                  Disciplina
                     ForEach(viewModel.disc, id: \.self){ c in
-                        ForEach(c.data.filter({$0 == "14/05/2025"}), id: \.self){ d in
+                        ForEach(c.data.filter({$0 == currentDateString}), id: \.self){ d in
                         HStack{
                             Text("\(c.nome!)")
                                 .font(.system(size: 30))
@@ -45,20 +54,27 @@ struct HomeAlunoView: View {
                         .padding(.bottom, 35)
                     }
                 }
-//                    if(viewModel.pres()! == true){
-//                        Circle()
-//                            .fill(.green)
-//                    }
+                    if(viewModel.pres() == nil){
+                        Circle()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(.gray)
+                    }else if(viewModel.pres() == true){
+                        Circle()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(.green)
+                    }else{
+                        Circle()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                            .foregroundStyle(.red)
+                    }
                     
                     Rectangle()
                         .frame(width: 320, height: 1)
                         .ignoresSafeArea()
                         .cornerRadius(10)
                         .padding(.vertical, 20)
-                    ForEach(viewModel.aluno, id: \.self){ a in
-                        Text("Faltas: \(a.faltas!)")
+                        Text("Faltas: \(user.faltas!)")
                             .font(.system(size: 25))
-                    }
                     Spacer()
                     }
         }.onAppear(){
@@ -70,5 +86,5 @@ struct HomeAlunoView: View {
     }
 
 #Preview {
-    HomeAlunoView()
+    HomeAlunoView(user: Aluno(nome: "", matricula: "", faltas: 1, idDisc: [1,2]))
 }
