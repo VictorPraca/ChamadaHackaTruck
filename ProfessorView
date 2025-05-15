@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfessorView: View {
+    
     var body: some View {
-        VStack {
             TabView{
                 HomeProfessorView()
                     .tabItem {
@@ -20,9 +20,8 @@ struct ProfessorView: View {
                         Label("", systemImage: "line.3.horizontal")
                     }
             }
-            .accentColor(.black)
-        }
-        Spacer()
+            .accentColor(.white)
+        
     }
 }
 
