@@ -9,35 +9,38 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
+    var tab = 0
     var body: some View {
         VStack {
             NavigationStack{
                 ZStack{
-                    Color.color
+                    Color.azulP
                         .ignoresSafeArea()
                     VStack{
 //                    ALUNO
-                        NavigationLink(destination: AlunoView()){
-                            ZStack{
-                                Rectangle()
-                                    .frame(width: 175, height: 55)
-                                    .cornerRadius(7)
-                                    .foregroundColor(.ciano)
-                                Text("Aluno")
-                                    .foregroundStyle(.black)
-                                    .font(.system(size: 25))
+
+                            NavigationLink(destination: AlunoView()){
+                                ZStack{
+                                    Rectangle()
+                                        .frame(width: 175, height: 55)
+                                        .cornerRadius(7)
+                                        .foregroundColor(.azulR)
+                                    Text("Aluno")
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 25))
+                                }
                             }
-                        }
-                        .padding()
+                            .padding()
+                        
 //                    PROFESSOR
                         NavigationLink(destination: ProfessorView()){
                             ZStack{
                                 Rectangle()
                                     .frame(width: 175, height: 55)
                                     .cornerRadius(7)
-                                    .foregroundColor(.cinza)
+                                    .foregroundColor(.azulR)
                                 Text("Professor")
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(.white)
                                     .font(.system(size: 25))
                             }
                         }
@@ -45,6 +48,8 @@ struct ContentView: View {
                 }
             }
             .accentColor(.black)
+        }.onAppear(){
+            viewModel.fetchAluno()
         }
     }
 }
