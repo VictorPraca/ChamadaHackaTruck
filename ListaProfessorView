@@ -7,32 +7,82 @@
 
 import SwiftUI
 
+struct DiscSheetView: View {
+    @StateObject var viewModel = ViewModel()
+    @Binding var disc: Disciplina
+    @State var assunto: String = "" 
+    var body: some View {
+        ZStack{
+            Color.azulP
+            VStack{
+                    Text("\(disc.nome!)")
+                        .font(.system(size: 25))
+                        .bold()
+                    HStack{
+                        Text("\(disc.data.first!)")
+                            .font(.system(size: 20))
+                    }
+                    HStack{
+                        Text("Assunto:")
+                            .font(.system(size: 20))
+                    }
+                    HStack{
+                        ZStack{
+                            TextField("teste", text: $assunto)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 200,height: 40)
+                                .background(.white)
+                                .cornerRadius(15)
+                        }
+                    }
+                Spacer()
+            }
+            .presentationDetents([.height(550)])
+            .padding(.top, 50)
+        }
+        .onAppear(){
+            viewModel.fetchDisc()
+            viewModel.fetchpresenca()
+            viewModel.fetchAluno()
+        }
+    }
+}
+
+
 struct ListaProfessorView: View {
     @StateObject var viewModel = ViewModel()
     @State private var showingSheet = false
+    @State private var selectedDisc = Disciplina(professor: "", nome: "", data: [""], idDisc: 0)
     var body: some View {
         ZStack{
                 Color.azulP
                     .ignoresSafeArea()
             VStack{
                 ScrollView{
-                    ForEach(viewModel.disc, id: \.self){ d in
+                    HStack{
+                        Text("Disciplinas:")
+                            .padding()
+                            .bold()
+                            .font(.system(size: 25))
+                        Spacer()
+                    }
+                    if let firstDisc = viewModel.disc.first {
                         ZStack{
                             Rectangle()
                                 .frame(width: 335, height: 45)
                                 .cornerRadius(10)
                                 .foregroundColor(.white)
-                            Button("\(d.nome!)") {
+                            Button("\(firstDisc.nome!)") {
+                                selectedDisc = firstDisc
                                 showingSheet.toggle()
                             }
                             .accentColor(.black)
-                            .sheet(isPresented: $showingSheet ) {
-                               
-                                
+                            .bold()
                             }
                         }
                     }
-                }
+                }.sheet(isPresented: $showingSheet) {
+                        DiscSheetView(disc: $selectedDisc)
             }
         }.onAppear(){
             viewModel.fetchDisc()
