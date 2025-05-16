@@ -31,13 +31,10 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 ## 🖼️ Fotos dos Componentes
 
 ### Leitor NFC RC522
-![Leitor NFC RC522](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/RFID-RC522.jpg/320px-RFID-RC522.jpg)
+![Leitor NFC RC522] (https://images.tcdn.com.br/img/img_prod/672486/sensor_rfid_mfrc522_13_56_mhz_75_1_bc1ba82d22bd543cf061c9d484c295bd_20241128103827.jpg)
 
 ### NodeMCU ESP8266
-![NodeMCU](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/NodeMCU_DEVKIT_1.0.jpg/320px-NodeMCU_DEVKIT_1.0.jpg)
-
-### LEDs e Buzzer
-![LEDs e Buzzer](https://upload.wikimedia.org/wikipedia/commons/9/99/Buzzer_and_LEDs.jpg)
+![NodeMCU](https://i0.wp.com/multipecascuritiba.com.br/wp-content/uploads/2023/05/placa-de-desenvolvimento-nodemcu-lua-wifi-com-esp8266-esp-12e-v3-0_4400.jpg?fit=1024%2C1024&ssl=1)
 
 ---
 
