@@ -18,8 +18,8 @@ struct ContentView: View {
                         .ignoresSafeArea()
                     VStack{
 //                    ALUNO
-
-                            NavigationLink(destination: AlunoView()){
+                        if(viewModel.aluno.count > 0){
+                            NavigationLink(destination: AlunoView(aluno: viewModel.aluno.first!)){
                                 ZStack{
                                     Rectangle()
                                         .frame(width: 175, height: 55)
@@ -31,7 +31,7 @@ struct ContentView: View {
                                 }
                             }
                             .padding()
-                        
+                        }
 //                    PROFESSOR
                         NavigationLink(destination: ProfessorView()){
                             ZStack{
