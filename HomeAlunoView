@@ -20,11 +20,7 @@ struct HomeAlunoView: View {
         ZStack{
             Color.azulP
                 .ignoresSafeArea()
-            
-                VStack{
-                    
-                    Text("\(user.nome!)")
-                    
+            VStack{
 //                  Disciplina
                     ForEach(viewModel.disc, id: \.self){ c in
                         ForEach(c.data.filter({$0 == currentDateString}), id: \.self){ d in
@@ -35,14 +31,14 @@ struct HomeAlunoView: View {
                             Spacer()
                         }
                         .padding(.leading)
-                        //                  Professor
+//                  Professor
                         HStack{
                             Text("Prof. \(c.professor!)")
                                 .font(.system(size: 25))
                             Spacer()
                         }
                         .padding(.leading)
-                        //                  Data
+//                  Data
                         HStack{
                             if c.data.count > 0 {
                                 Text("\(c.data.first!)")
@@ -86,5 +82,5 @@ struct HomeAlunoView: View {
     }
 
 #Preview {
-    HomeAlunoView(user: Aluno(nome: "", matricula: "", faltas: 1, idDisc: [1,2]))
+    HomeAlunoView(user: Aluno(nome: "", matricula: "", faltas: 0, idDisc: [1,2]))
 }
