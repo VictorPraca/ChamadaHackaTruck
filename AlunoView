@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AlunoView: View {
-    init() {
-            UITabBar.appearance().backgroundColor = UIColor.azulR
-        }
+
+    var aluno : Aluno
+    
     var body: some View {
         TabView{
-            HomeAlunoView(user: Aluno(nome: "", matricula: "", faltas: 1, idDisc: [1]))
+            HomeAlunoView(user: aluno)
                 .tabItem {
                     Image(systemName: "house.fill")
                 }
@@ -21,6 +21,8 @@ struct AlunoView: View {
                 .tabItem {
                     Image(systemName: "line.3.horizontal")
                 }
+        }.onAppear(){
+            UITabBar.appearance().backgroundColor = UIColor.azulR
         }
         .frame(maxHeight: .infinity)
         .accentColor(.white)
@@ -31,5 +33,5 @@ struct AlunoView: View {
 }
 
 #Preview {
-    AlunoView()
+    AlunoView(aluno: Aluno(nome: "", matricula: "", faltas: 0, idDisc: [1]))
 }
