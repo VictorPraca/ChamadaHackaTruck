@@ -31,16 +31,15 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 ## 🖼️ Componentes
 
 ### Leitor NFC RC522
-![Leitor NFC RC522] (https://app.cirkitdesigner.com/project/f4564a5b-4ae4-4b1f-8a08-e86be5e817d3)
+![Leitor NFC RC522] (./assetsHardware/sensorNFC.png)
 
 ### NodeMCU ESP8266
-![NodeMCU](https://app.cirkitdesigner.com/project/44e59bfc-7859-4ab4-8ed2-739a47d4f0fd)
+![NodeMCU](./assetsHardware/nodemcu.png)
+
+### Circuito Completo
+![Circuito Completo](./assetsHardware/circuitoCompleto.png)
 
 ---
-
-## Circuito Completo
-(https://app.cirkitdesigner.com/project/350f5c02-84ec-4470-85c4-f96aefac15a8)
-
 ## ⚙️ Funcionamento do Projeto
 
 1. Aluno aproxima o cartão NFC do leitor.
