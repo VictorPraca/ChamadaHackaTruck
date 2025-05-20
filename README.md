@@ -28,15 +28,18 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 
 ---
 
-## 🖼️ Fotos dos Componentes
+## 🖼️ Componentes
 
 ### Leitor NFC RC522
-![Leitor NFC RC522] (https://images.tcdn.com.br/img/img_prod/672486/sensor_rfid_mfrc522_13_56_mhz_75_1_bc1ba82d22bd543cf061c9d484c295bd_20241128103827.jpg)
+![Leitor NFC RC522] (https://app.cirkitdesigner.com/project/f4564a5b-4ae4-4b1f-8a08-e86be5e817d3)
 
 ### NodeMCU ESP8266
-![NodeMCU](https://i0.wp.com/multipecascuritiba.com.br/wp-content/uploads/2023/05/placa-de-desenvolvimento-nodemcu-lua-wifi-com-esp8266-esp-12e-v3-0_4400.jpg?fit=1024%2C1024&ssl=1)
+![NodeMCU](https://app.cirkitdesigner.com/project/44e59bfc-7859-4ab4-8ed2-739a47d4f0fd)
 
 ---
+
+## Circuito Completo
+(https://app.cirkitdesigner.com/project/350f5c02-84ec-4470-85c4-f96aefac15a8)
 
 ## ⚙️ Funcionamento do Projeto
 
