@@ -31,7 +31,7 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 ## 🖼️ Componentes
 
 ### Leitor NFC RC522
-![Leitor NFC RC522] (./assetsHardware/sensorNFC.png)
+![Leitor NFC RC522](./assetsHardware/sensorNFC.png)
 
 ### NodeMCU ESP8266
 ![NodeMCU](./assetsHardware/nodemcu.png)
