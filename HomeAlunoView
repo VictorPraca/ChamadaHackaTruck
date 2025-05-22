@@ -51,9 +51,12 @@ struct HomeAlunoView: View {
                     }
                 }
                     if(viewModel.pres() == nil){
-                        Circle()
-                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                            .foregroundStyle(.gray)
+                        ZStack{Circle()
+                                .frame(width: 100)
+                                .foregroundStyle(.gray)
+                            Text("?")
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        }
                     }else if(viewModel.pres() == true){
                         Circle()
                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
