@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import GoogleGenerativeAI
 
-struct DiscSheetView: View {
+struct DiscProfSheetView: View {
     @StateObject var viewModel = ViewModel()
     @Binding var disc: Disciplina
-    @State var assunto: String = "" 
+    let model = GenerativeModel(name: "gemini-1.5-flash-latest", apiKey: APIKey.default)
+    @State var textInput = ""
+    @ObservedObject var aiResponse = GlobalData.compartilhado
     var body: some View {
         ZStack{
             Color.azulP
-            VStack{
+            ScrollView{
+                VStack{
                     Text("\(disc.nome!)")
                         .font(.system(size: 25))
                         .bold()
@@ -27,25 +31,66 @@ struct DiscSheetView: View {
                             .font(.system(size: 20))
                     }
                     HStack{
-                        ZStack{
-                            TextField("teste", text: $assunto)
+                        VStack {
+                            HStack{
+                                TextField("Assunto", text: $textInput)
+                                    .textFieldStyle(.roundedBorder)
+                                    .foregroundStyle(.white)
+                                    .frame(width: 250)
+                                
+                                Button {
+                                    sendMessage()
+                                } label: {
+                                    Image(systemName: "paperplane.fill")
+                                        .foregroundColor(.black)
+                                }
+                               
+                            }
+                            Text(aiResponse.response)
+                                .padding(.horizontal)
                                 .multilineTextAlignment(.center)
-                                .frame(width: 200,height: 40)
-                                .background(.white)
-                                .cornerRadius(15)
                         }
                     }
-                Spacer()
-            }
+                    Spacer()
+                }}
             .presentationDetents([.height(550)])
             .padding(.top, 50)
         }
         .onAppear(){
             viewModel.fetchDisc()
-            viewModel.fetchpresenca()
-            viewModel.fetchAluno()
         }
     }
+    func sendMessage() {
+            // 1. Validação
+            guard !textInput.isEmpty else {
+                aiResponse.response = "Digite o tema da aula antes de enviar!"
+                return
+            }
+            
+            // 2. Mostra estado de carregamento
+            aiResponse.response = "Gerando resumo..."
+            
+            Task {
+                do {
+                    // 3. Usa o prompt template com o tema
+                    let promptFinal = viewModel.gerarPromptGemini(tema: textInput)
+                    
+                    // 4. Chama o Gemini
+                    let response = try await model.generateContent(promptFinal)
+                    
+                    // 5. Atualiza a UI
+                    DispatchQueue.main.async {
+                        aiResponse.response = response.text ?? "Resposta inválida"
+                        textInput = "" // Limpa o campo
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        aiResponse.response = "Erro: \(error.localizedDescription)"
+                    }
+                }
+            }
+        }
 }
 
 
@@ -53,10 +98,13 @@ struct ListaProfessorView: View {
     @StateObject var viewModel = ViewModel()
     @State private var showingSheet = false
     @State private var selectedDisc = Disciplina(professor: "", nome: "", data: [""], idDisc: 0)
+    
+    @ObservedObject var aiResponse = GlobalData.compartilhado
+    
     var body: some View {
         ZStack{
-                Color.azulP
-                    .ignoresSafeArea()
+            Color.azulP
+                .ignoresSafeArea()
             VStack{
                 ScrollView{
                     HStack{
@@ -67,26 +115,35 @@ struct ListaProfessorView: View {
                         Spacer()
                     }
                     if let firstDisc = viewModel.disc.first {
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 335, height: 45)
-                                .cornerRadius(10)
-                                .foregroundColor(.white)
-                            Button("\(firstDisc.nome!)") {
-                                selectedDisc = firstDisc
-                                showingSheet.toggle()
-                            }
-                            .accentColor(.black)
-                            .bold()
-                            }
+                        Button {
+                            selectedDisc = firstDisc
+                            showingSheet.toggle()
+                        } label: {
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 335, height: 50)
+                                    .cornerRadius(10)
+                                    .foregroundColor(.white)
+                                VStack{
+                                    HStack{
+                                        Text("\(firstDisc.nome!)")
+                                            .font(.system(size: 18))
+                                            .padding(.leading, 35)
+                                        Spacer()
+                                    }
+                                }
+                            }.accentColor(.black)
+                            
+                        }
                         }
                     }
-                }.sheet(isPresented: $showingSheet) {
-                        DiscSheetView(disc: $selectedDisc)
+                }
+            }.onAppear(){
+                viewModel.fetchDisc()
             }
-        }.onAppear(){
-            viewModel.fetchDisc()
-        }
+            .sheet(isPresented: $showingSheet) {
+                DiscProfSheetView(disc: $selectedDisc, aiResponse: aiResponse)
+            }
     }
 }
 
