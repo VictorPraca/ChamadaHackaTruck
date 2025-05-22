@@ -99,4 +99,26 @@ class ViewModel: ObservableObject{
     }
         return nil
     }
+    private let promptTemplate = """
+        Você é um assistente pedagógico especializado em gerar resumos claros e didáticos para alunos do ensino médio.
+        Com base no tema abaixo, gere um resumo em até 2 parágrafos, com linguagem acessível e inclua exemplos práticos se possível.
+        
+        Tema da aula: *%@*
+        
+        Instruções específicas:
+        - Não ultrapasse 200 palavras
+        - Use marcadores se facilitar a compreensão
+        - Mantenha um tom motivacional
+        """
+        
+        // Função que monta o prompt final (agora corrigida)
+        func gerarPromptGemini(tema: String) -> String {
+            return String(format: promptTemplate, tema)
+        }
+}
+
+class GlobalData: ObservableObject {
+    @Published var response: String = ""
+    
+    static let compartilhado = GlobalData()
 }
