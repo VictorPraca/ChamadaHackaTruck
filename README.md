@@ -1,5 +1,7 @@
 # 🎒 Sistema de Controle de Acesso Escolar com NFC
 
+![Logo do Aplicativo](./assets/logo.png)
+
 Este projeto simula um sistema de controle de entrada e saída de alunos em salas de aula, utilizando **NodeMCU ESP8266**, **leitor NFC** e sinalização com **LEDs** e **buzzer**.Além do hardware, conta com um aplicativo mobile desenvolvido em **SwiftUI** e recursos de IA para auxiliar na organização de aulas, promovendo segurança, automação e integração digital no ambiente escolar.
 
 ---
@@ -23,6 +25,15 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 | **Postman**       | Testes e simulação de requisições HTTP                                 |
 | **IBM Cloudant**  | Banco de dados NoSQL para armazenar registros dos alunos e professores |
 | **Gemini (IA)**   | Geração automática de conteúdos como assuntos das aulas                |
+
+---
+
+## 🎨 Paleta de Cores Utilizada
+
+| Cor                | Hexadecimal |
+|--------------------|-------------|
+| Azul Ciano         | `#90CAF9`   | 
+| Azul Royal         | `#1565C0`   | 
 
 ---
 
@@ -67,6 +78,8 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 5. O LED branco permanece ligado indicando o sistema em operação.
 
 ---
+
+
 
 ## 📱 Telas do Aplicativo
 
