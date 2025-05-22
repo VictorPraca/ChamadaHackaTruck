@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import GoogleGenerativeAI
 
 struct AlunoSheetView: View {
     @StateObject var viewModel = ViewModel()
     @Binding var aluno: Aluno
+    let model = GenerativeModel(name: "gemini-1.5-flash-latest", apiKey: "YOUR_API_KEY")
     var body: some View {
         ZStack{
             Color.azulP
@@ -46,6 +48,11 @@ struct HomeProfessorView: View {
     @State private var showingSheet = false
     @State private var selectedAluno = Aluno(nome: "", matricula: "", faltas: 0, idDisc: [])
     @StateObject var viewModel = ViewModel()
+    var currentDateString:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: Date())
+    }
     var body: some View {
         ZStack{
             Color.azulP
@@ -53,15 +60,9 @@ struct HomeProfessorView: View {
             ScrollView{
             VStack{
                 VStack{
-                    HStack{
-                        Text("Alunos(as):")
-                            .padding()
-                            .bold()
-                            .font(.system(size: 25))
-                        Spacer()
-                    }
+                    
                     ForEach(viewModel.disc, id: \.self){ c in
-                        ForEach(c.data.filter({$0 == "14/05/2025"}), id: \.self){ d in
+                        ForEach(c.data.filter({$0 == currentDateString}), id: \.self){ d in
                             HStack{
                                 Text("\(c.nome!)")
                                     .font(.system(size: 30))
@@ -69,7 +70,7 @@ struct HomeProfessorView: View {
                                 Spacer()
                             }
                             .padding(.leading)
-                            //                  Data
+//                  Data
                             HStack{
                                 if c.data.count > 0 {
                                     Text("\(c.data.first!)")
@@ -78,27 +79,65 @@ struct HomeProfessorView: View {
                                 Spacer()
                             }
                             .padding(.leading)
-                            .padding(.bottom, 35)
+
                         }
                     }
                 }
-                
+                HStack{
+                    Text("Alunos:")
+                        .padding()
+                        .bold()
+                        .font(.system(size: 25))
+                    Spacer()
+                }
                 ForEach(viewModel.aluno, id: \.self){ a in
-                    ZStack{
-                        Rectangle()
-                            .frame(width: 335, height: 45)
-                            .cornerRadius(10)
-                            .foregroundColor(.white)
-                        
-                        Button("\(a.nome!)") {
+                        Button {
                             selectedAluno = a
                             showingSheet.toggle()
-                        }
-                        .accentColor(.black)
+                        } label: {
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 335, height: 50)
+                                    .cornerRadius(10)
+                                    .foregroundColor(.white)
+                                VStack{
+                                    HStack{
+                                        Text("\(a.nome!)")
+                                            .font(.system(size: 18))
+                                            .padding(.leading, 35)
+                                        
+                                        if a.nome == "Efraim Costa"{
+                                            if(viewModel.pres() == nil){
+                                                Circle()
+                                                    .frame(width: 10)
+                                                    .foregroundStyle(.gray)
+                                                    
+                                            }else if(viewModel.pres() == true){
+                                                Circle()
+                                                    .frame(width: 10)
+                                                    .foregroundStyle(.green)
+                                            }else{
+                                                Circle()
+                                                    .frame(width: 10)
+                                                    .foregroundStyle(.red)
+                                            }
+                                        }
+                                        else{
+                                            Circle()
+                                                .frame(width: 10)
+                                                .foregroundStyle(.gray)
+                                        }
+                                        Spacer()
+                                    }
+                                }
+                                
+                            }
+                        }.accentColor(.black)
+                            .padding(.bottom, 10)
                         
                     }
                 }
-            }
+//            }
                 Spacer()
             }.sheet(isPresented: $showingSheet ) {
                

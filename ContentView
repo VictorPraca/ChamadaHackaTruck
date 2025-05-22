@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
+    @State var user = ""
+    @State var senha = ""
     var tab = 0
     var body: some View {
         VStack {
@@ -17,7 +19,15 @@ struct ContentView: View {
                     Color.azulP
                         .ignoresSafeArea()
                     VStack{
-//                    ALUNO
+                        //                    ALUNO
+                        VStack(spacing:30){
+                            Image("log")
+                                .resizable()
+                                .frame(width:180,height: 180)
+                        }
+                        .padding(.top)
+                        Spacer()
+                            
                         if(viewModel.aluno.count > 0){
                             NavigationLink(destination: AlunoView(aluno: viewModel.aluno.first!)){
                                 ZStack{
@@ -28,6 +38,7 @@ struct ContentView: View {
                                     Text("Aluno")
                                         .foregroundStyle(.white)
                                         .font(.system(size: 25))
+                                        .bold()
                                 }
                             }
                             .padding()
@@ -42,13 +53,17 @@ struct ContentView: View {
                                 Text("Professor")
                                     .foregroundStyle(.white)
                                     .font(.system(size: 25))
+                                    .bold()
                             }
                         }
+                        .padding(.bottom, 100)
+                        Spacer()
                     }
                 }
             }
-            .accentColor(.black)
+            .accentColor(.white)
         }.onAppear(){
+            UITabBar.appearance().backgroundColor = UIColor.azulR
             viewModel.fetchAluno()
         }
     }
