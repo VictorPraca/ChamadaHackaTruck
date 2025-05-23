@@ -105,3 +105,9 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 ![View Lista Alunos](./Views/viewListaAlunos.jpg)
 
 ---
+
+## 🎥 Demonstração do Fluxo do Aplicativo
+
+[![Assista à demonstração]](https://www.youtube.com/watch?v=SEU_ID_DO_VIDEO)
+
+---
