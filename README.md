@@ -108,6 +108,8 @@ Este projeto simula um sistema de controle de entrada e saída de alunos em sala
 
 ## 🎥 Demonstração do Fluxo do Aplicativo
 
-[![Assista à demonstração]](https://www.youtube.com/watch?v=SEU_ID_DO_VIDEO)
+[![Clique para assistir à demonstração]](https://www.youtube.com/shorts/TirJ2nh8W2M)
+
+> Vídeo demonstrando o uso completo do aplicativo: fluxo de aluno, geração de assunto com IA (Gemini), visualização de disciplina e lista de presença.
 
 ---
